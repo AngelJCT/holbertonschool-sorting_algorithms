@@ -43,5 +43,5 @@ void insertion_sort_list(listint_t **list)
 		}
 	}
 	(*list) = dummy->next;
-	print_list(dummy);
+	print_list(dummy->next);
 }
