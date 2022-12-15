@@ -6,15 +6,13 @@
  */
 void quick_sort(int *array, size_t size)
 {
-	unsigned int length = 0;
-
 	if (size < 2)
 		return;
 
 	if (array == NULL)
 		return;
 
-	quicksort_recursion(array, 0, length - 1);
+	quicksort_recursion(array, 0, size[array] - 1);
 	print_array(array, size);
 }
 /**
