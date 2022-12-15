@@ -19,6 +19,7 @@ void quick_sort(int *array, size_t size)
  *@array: pointer to array
  *@low: lowest index
  *@high: highest index
+ *@size: size of array
  *Return: index
  */
 int partition(int *array, int low, int high, size_t size)
@@ -58,6 +59,7 @@ void swap(int *x, int *y)
  *@array: pointer to array
  *@low: lowest index
  *@high: highest index
+ *@size: size of array
  */
 void quicksort_recursion(int *array, int low, int high, size_t size)
 {
