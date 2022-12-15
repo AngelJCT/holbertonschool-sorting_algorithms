@@ -7,7 +7,7 @@
  */
 void bubble_sort(int *array, size_t size)
 {
-	unsigned int i = 0, j, temp;
+	unsigned int i, j;
 	bool swapped = false;
 
 	if (array == NULL)
@@ -16,19 +16,33 @@ void bubble_sort(int *array, size_t size)
 	if (size < 2)
 		return;
 
-	do {
-		swapped = false;
-		for (j = 0; j < (size - 1 - i); i++)
+	while (swapped)
+	{
+		for (i = 0; i < size - 1; i++)
 		{
-			if (array[j] > array[j + 1])
+			swapped = false;
+			for (j = 0; j < (size - 1 - i); i++)
 			{
-				temp = array[j];
-				array[j] = array[j + 1];
-				array[j + 1] = temp;
-				swapped = true;
-				print_array(array, size);
+				if (array[j] > array[j + 1])
+				{
+					swap(&array[j], &array[j + 1]);
+					print_array(array, size);
+					swapped = true;
+				}
 			}
 		}
-		i++;
-	} while (swapped);
+	}
+}
+/**
+ *swap-function to swap values
+ *@x: first value
+ *@y: second value
+ */
+void swap(int *x, int *y)
+{
+	int temp;
+
+	temp = *x;
+	*x = *y;
+	*y = temp;
 }
