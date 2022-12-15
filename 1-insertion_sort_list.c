@@ -14,6 +14,9 @@ void insertion_sort_list(listint_t **list)
 	if (dummy == NULL)
 		return;
 
+	if (*list == NULL)
+		*list = dummy;
+
 	dummy->next = (*list);
 	node = (*list);
 
