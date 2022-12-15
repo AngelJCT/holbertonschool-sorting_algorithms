@@ -25,17 +25,17 @@ int partition(int *array, int low, int high, size_t size)
 {
 	int pivot = array[high];
 	int i = low, j;
+	(void)size;
 
 	for (j = low; j < high; j++)
 	{
 		if (array[j] < pivot)
 		{
-			swap(&array[i], &array[j]);
+			swap(array, &array[i], &array[j], size);
 			i++;
 		}
 	}
-	swap(&array[i], &array[high]);
-	print_array(array, size);
+	swap(array, &array[i], &array[high], size);
 	return (i);
 }
 /**
@@ -43,13 +43,14 @@ int partition(int *array, int low, int high, size_t size)
  *@x: first value
  *@y: second value
  */
-void swap(int *x, int *y)
+void swap(int *array, int *x, int *y, size_t size)
 {
 	int temp;
 
 	temp = *x;
 	*x = *y;
 	*y = temp;
+	print_array(array, size);
 }
 /**
  *quicksort_recursion-function to make recursive calls to loop over the array
