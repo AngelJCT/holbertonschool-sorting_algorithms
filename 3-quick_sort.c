@@ -6,8 +6,7 @@
  */
 void quick_sort(int *array, size_t size)
 {
-	unsigned int i, partition_index, temp;
-	int pivot;
+	unsigned int length = 0;
 
 	if (size < 2)
 		return;
@@ -15,24 +14,58 @@ void quick_sort(int *array, size_t size)
 	if (array == NULL)
 		return;
 
-	pivot = array[size - 1];
-	partition_index = 0;
+	quicksort_recursion(array, 0, length - 1);
+	print_array(array, size);
+}
+/**
+ *partition-function to separate array into sub arrays
+ *@array: pointer to array
+ *@low: lowest index
+ *@high: highest index
+ *Return: index
+ */
+int partition(int *array, int low, int high)
+{
+	int pivot = array[high];
+	int i = low - 1, j;
 
-	for (i = 0; i < size - 1; i++)
+	for (j = 0; j < high - 1; j++)
 	{
-		if (array[i] < pivot)
+		if (array[j] < pivot)
 		{
-			temp = array[i];
-			array[i] = array[partition_index];
-			array[partition_index] = temp;
-			partition_index++;
-			print_array(array, size);
+			i++;
+			swap(&array[i], &array[j]);
 		}
-		temp = array[size -1];
-		array[size - 1] = array[partition_index];
-		array[partition_index] = temp;
+	}
+	swap(&array[i], &array[high]);
+	return (i);
+}
+/**
+ *swap-function to swap values
+ *@x: first value
+ *@y: second value
+ */
+void swap(int *x, int *y)
+{
+	int temp;
 
-		quick_sort(array, partition_index);
-		quick_sort(array + partition_index + 1, size - partition_index - 1);
+	temp = *x;
+	*x = *y;
+	*y = temp;
+}
+/**
+ *quicksort_recursion-function to make recursive calls to loop over the array
+ *@array: pointer to array
+ *@low: lowest index
+ *@high: highest index
+ */
+void quicksort_recursion(int *array, int low, int high)
+{
+	if (low < high)
+	{
+		int pivot_index = partition(array, low, high);
+
+		quicksort_recursion(array, low, pivot_index - 1);
+		quicksort_recursion(array, pivot_index + 1, high);
 	}
 }
