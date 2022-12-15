@@ -11,11 +11,11 @@ void insertion_sort_list(listint_t **list)
 
 	dummy = malloc(sizeof(listint_t));
 
-	if (dummy == NULL)
+	if (list == NULL)
 		return;
 
-	if (*list == NULL)
-		*list = dummy;
+	if (dummy == NULL)
+		return;
 
 	dummy->next = (*list);
 	node = (*list);
