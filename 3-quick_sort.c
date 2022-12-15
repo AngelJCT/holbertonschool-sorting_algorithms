@@ -12,8 +12,7 @@ void quick_sort(int *array, size_t size)
 	if (array == NULL)
 		return;
 
-	quicksort_recursion(array, 0, size[array] - 1);
-	print_array(array, size);
+	quicksort_recursion(array, 0, size - 1, size);
 }
 /**
  *partition-function to separate array into sub arrays
@@ -22,20 +21,21 @@ void quick_sort(int *array, size_t size)
  *@high: highest index
  *Return: index
  */
-int partition(int *array, int low, int high)
+int partition(int *array, int low, int high, size_t size)
 {
 	int pivot = array[high];
-	int i = low - 1, j;
+	int i = low, j;
 
-	for (j = 0; j < high - 1; j++)
+	for (j = low; j < high; j++)
 	{
 		if (array[j] < pivot)
 		{
-			i++;
 			swap(&array[i], &array[j]);
+			i++;
 		}
 	}
 	swap(&array[i], &array[high]);
+	print_array(array, size);
 	return (i);
 }
 /**
@@ -57,13 +57,13 @@ void swap(int *x, int *y)
  *@low: lowest index
  *@high: highest index
  */
-void quicksort_recursion(int *array, int low, int high)
+void quicksort_recursion(int *array, int low, int high, size_t size)
 {
 	if (low < high)
 	{
-		int pivot_index = partition(array, low, high);
+		int pivot_index = partition(array, low, high, size);
 
-		quicksort_recursion(array, low, pivot_index - 1);
-		quicksort_recursion(array, pivot_index + 1, high);
+		quicksort_recursion(array, low, pivot_index - 1, size);
+		quicksort_recursion(array, pivot_index + 1, high, size);
 	}
 }
