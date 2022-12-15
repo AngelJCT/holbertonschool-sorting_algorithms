@@ -18,6 +18,7 @@ void insertion_sort_list(listint_t **list)
 		return;
 
 	dummy->next = (*list);
+	dummy->prev = NULL;
 	node = (*list);
 
 	while (node && node->next)
