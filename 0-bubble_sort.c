@@ -1,4 +1,5 @@
 #include "sort.h"
+#include <stdbool.h>
 /**
  *bubble_sort-function to sort an array in ascending order
  *@array: pointer to array
@@ -6,7 +7,8 @@
  */
 void bubble_sort(int *array, size_t size)
 {
-	unsigned int i, j, temp, flag = 1;
+	unsigned int i = 0, j, temp;
+	bool swapped = false;
 
 	if (array == NULL)
 		return;
@@ -14,9 +16,8 @@ void bubble_sort(int *array, size_t size)
 	if (size < 2)
 		return;
 
-	for (i = 0; i < size - 1 - i; i++)
-	{
-		flag = 0;
+	do {
+		swapped = false;
 		for (j = 0; j < size - 1 - i; i++)
 		{
 			if (array[j] > array[j + 1])
@@ -24,11 +25,12 @@ void bubble_sort(int *array, size_t size)
 				temp = array[j];
 				array[j] = array[j + 1];
 				array[j + 1] = temp;
-				flag = 1;
+				swapped = true;
 				print_array(array, size);
 			}
-			if (flag == 0)
+			if (swapped == false)
 				break;
 		}
-	}
+		i++;
+	} while (swapped);
 }
