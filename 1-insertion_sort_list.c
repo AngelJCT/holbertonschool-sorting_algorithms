@@ -7,41 +7,54 @@
  */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *dummy, *node, *next_node, *current, *prev;
+	listint_t *current = (*list), *temp;
 
-	dummy = malloc(sizeof(listint_t));
-
-	if (list == NULL)
+	if (list == NULL || (*list) == NULL)
+		return;
+	if (dlistint_len(*list) < 2)
 		return;
 
-	if (dummy == NULL)
-		return;
-
-	dummy->next = (*list);
-	dummy->prev = NULL;
-	node = (*list);
-
-	while (node && node->next)
+	while (current)
 	{
-		if (node->next->n < node->n)
+		while (current->next && current->n > current->next->n)
 		{
-			prev = NULL;
-			current = dummy->next;
-			while (current->n < node->next->n)
+			temp = current->next;
+			current->next = temp->next;
+			temp->prev = current->prev;
+
+			if (current->prev != NULL)
+				current->prev->next = temp;
+
+			if (temp->next != NULL)
+				temp->next->prev = current;
+
+			current->prev = temp;
+			temp->next = current;
+
+			if (temp->prev != NULL)
+				current = temp->prev;
+			else
 			{
-				prev = current;
-				current = current->next;
+				*list = temp;
 			}
-			next_node = node->next;
-			node->next = next_node->next;
-			next_node->next = current;
-			prev->next = next_node;
+			print_list(*list);
 		}
-		else
-		{
-			node = node->next;
-		}
+		current = current->next;
 	}
-	(*list) = dummy->next;
-	print_list(dummy->next);
+}
+/**
+ *dlistint_len-function to get the length of doubly linked list
+ *@head: first node
+ *Return: length of list
+ */
+int dlistint_len(listint_t *head)
+{
+	int len_count = 0;
+
+	while (head != NULL)
+	{
+		head = head->next;
+		len_count++;
+	}
+	return (len_count);
 }
