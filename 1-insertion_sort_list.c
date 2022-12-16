@@ -2,17 +2,19 @@
 #include <stddef.h>
 /**
  *insertion_sort_list-function to sort a doubly linked list
- *@listint_t: pointer to doubly linked list struct
+ *@list: pointer to doubly linked list struct
  *
  */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *current = (*list), *temp;
+	listint_t *current = NULL, *temp = NULL;
 
 	if (list == NULL || (*list) == NULL)
 		return;
 	if (dlistint_len(*list) < 2)
 		return;
+
+	current = (*list);
 
 	while (current)
 	{
