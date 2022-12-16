@@ -14,12 +14,16 @@ void insertion_sort_list(listint_t **list)
 	if (dlistint_len(*list) < 2)
 		return;
 
-	current = (*list);
+	current = (*list);//pointer to first element
 
-	while (current)
+	while (current)//loop that iterates through the list from the first element
 	{
 		while (current->next && current->n > current->next->n)
 		{
+			//On each iteration it checks if the current element is larger than the next
+			//element in the list. If it is, the function swaps the positions of the two elements.
+			//The function tge updates the prev pointer of current and the next pointer to temp to point
+			//to each other.
 			temp = current->next;
 			current->next = temp->next;
 			temp->prev = current->prev;
@@ -33,6 +37,9 @@ void insertion_sort_list(listint_t **list)
 			current->prev = temp;
 			temp->next = current;
 
+			//if the prev pointer is NULL, this means that temp has moved to the front of the list,
+			//so the function updates the list pointer to point to temp.
+			//The function then moves current to the next element in the list, and the loop continues.
 			if (temp->prev != NULL)
 				current = temp->prev;
 			else
